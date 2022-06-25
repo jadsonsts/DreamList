@@ -20,14 +20,33 @@ class MainVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        //generateDummyData()
+//        generateDummyData()
         attemptFetch()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.Segues.editItem {
+            if let destionation = segue.destination as? ItemDetailsVC {
+                if let item = sender as? Item {
+                    destionation.itemToEdit = item
+                }
+                
+            }
+        }
+    }
     
 }
 
-//MARK: - TableView
+//MARK: - IBActions
+
+extension MainVC {
+    @IBAction func segmentControlChanged(_ sender: UISegmentedControl) {
+        attemptFetch()
+        tableView.reloadData()
+    }
+}
+
+//MARK: - TableView setup
 extension MainVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -64,6 +83,13 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
         cell.configCell(item)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let objs = controller.fetchedObjects, objs.count > 0 {
+            let item = objs[indexPath.row]
+            performSegue(withIdentifier: Constants.Segues.editItem, sender: item)
+        }
+    }
+    
 }
 
 extension MainVC: NSFetchedResultsControllerDelegate {
@@ -89,8 +115,21 @@ extension MainVC: NSFetchedResultsControllerDelegate {
     func attemptFetch() {
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
         let dateSort = NSSortDescriptor(key: "created", ascending: false)
+        let priceSort = NSSortDescriptor(key: "price", ascending: true)
+        let titleSort = NSSortDescriptor(key: "name", ascending: true)
         
-        fetchRequest.sortDescriptors = [dateSort]
+        
+        //to sort the data according to the segmentController selected
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            fetchRequest.sortDescriptors = [dateSort]
+        case 1:
+            fetchRequest.sortDescriptors = [priceSort]
+        case 2:
+            fetchRequest.sortDescriptors = [titleSort]
+        default:
+            break
+        }
         
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: Constants.context,
@@ -105,6 +144,38 @@ extension MainVC: NSFetchedResultsControllerDelegate {
         } catch let err {
             print(err)
         }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            if let indexPath = newIndexPath {
+                tableView.insertRows(at: [indexPath], with: .fade)
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        case .update:
+            if let indexPath = indexPath {
+                let cell = tableView.cellForRow(at: indexPath) as! ItemCell
+                configureCell(cell, indexPath: indexPath)
+            }
+        case .move:
+            if let indexPath = indexPath {
+                tableView.insertRows(at: [indexPath], with: .fade)
+            }
+        @unknown default:
+            break
+        }
+    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
     }
 }
 

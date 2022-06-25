@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF10A5752866D6CB00882226 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10A5742866D6CB00882226 /* CustomTextField.swift */; };
+		DF10A5772866E48D00882226 /* ItemDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10A5762866E48D00882226 /* ItemDetailsVC.swift */; };
 		DF2AF5AB2860FFA100BBE62A /* MaterialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2AF5AA2860FFA100BBE62A /* MaterialView.swift */; };
 		DF2AF5AD28639EF800BBE62A /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2AF5AC28639EF800BBE62A /* ItemCell.swift */; };
 		DF2AF5AF2863A18600BBE62A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2AF5AE2863A18600BBE62A /* Constants.swift */; };
@@ -28,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DF10A5742866D6CB00882226 /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		DF10A5762866E48D00882226 /* ItemDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsVC.swift; sourceTree = "<group>"; };
 		DF2AF5AA2860FFA100BBE62A /* MaterialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialView.swift; sourceTree = "<group>"; };
 		DF2AF5AC28639EF800BBE62A /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		DF2AF5AE2863A18600BBE62A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				DFEAA4F82860F358007A9C7E /* MainVC.swift */,
+				DF10A5762866E48D00882226 /* ItemDetailsVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -120,6 +125,7 @@
 			children = (
 				DF2AF5AA2860FFA100BBE62A /* MaterialView.swift */,
 				DF2AF5AC28639EF800BBE62A /* ItemCell.swift */,
+				DF10A5742866D6CB00882226 /* CustomTextField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -210,6 +216,8 @@
 				DFEAA51D2860F86B007A9C7E /* Store+CoreDataProperties.swift in Sources */,
 				DFEAA51B2860F86B007A9C7E /* Image+CoreDataProperties.swift in Sources */,
 				DF2AF5AB2860FFA100BBE62A /* MaterialView.swift in Sources */,
+				DF10A5752866D6CB00882226 /* CustomTextField.swift in Sources */,
+				DF10A5772866E48D00882226 /* ItemDetailsVC.swift in Sources */,
 				DF2AF5AD28639EF800BBE62A /* ItemCell.swift in Sources */,
 				DFEAA4FF2860F358007A9C7E /* DreamLister.xcdatamodeld in Sources */,
 				DFEAA4F92860F358007A9C7E /* MainVC.swift in Sources */,
